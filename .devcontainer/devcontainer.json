@@ -1,0 +1,12 @@
+{
+  "name": "poetry-prac-dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {},
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
+  "postCreateCommand": "chmod +x .devcontainer/setup-poetry.sh && sh .devcontainer/setup-poetry.sh"
+}

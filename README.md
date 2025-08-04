@@ -1,0 +1,1 @@
+[memo]学びをdocs/README.mdにメモっている。cursorとかに手伝ってもらいながら
