@@ -22,7 +22,7 @@ jobs:
       - name: Install Poetry
         uses: abatilo/actions-poetry@v3
         with:
-          poetry-version: '1.8.2'  # 使用しているPoetryバージョンに合わせる
+          poetry-version: '1.6.1'  # 使用しているPoetryバージョンに合わせる
 
       # CI上では仮想環境を作る意味はない(逆にいうと、Localでは環境間の競合を避けるためにprojectごとに仮想環境を作るのがベター)
       # じゃあpoetry使う意味は？となるけど、poetry.lock使って堅牢に関連ライブラリをインストールできるのがメリット
@@ -31,6 +31,17 @@ jobs:
 
       - name: Install dependencies
         run: poetry install --no-interaction --no-root
+
+      - name: Check poetry environment
+        run: |
+          echo "=== Poetry virtual environments ==="
+          poetry env list || echo "No virtual environments found"
+
+          echo "=== Poetry Python info ==="
+          poetry env info || echo "No environment info available"
+
+          echo "=== Active Python version ==="
+          python --version
 
       - name: Run tests
         run: poetry run pytest
