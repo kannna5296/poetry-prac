@@ -1,0 +1,36 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'  # 任意のバージョンに変更可
+
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v3
+        with:
+          poetry-version: '1.8.2'  # 使用しているPoetryバージョンに合わせる
+
+      # CI上では仮想環境を作る意味はない(逆にいうと、Localでは環境間の競合を避けるためにprojectごとに仮想環境を作るのがベター)
+      # じゃあpoetry使う意味は？となるけど、poetry.lock使って堅牢に関連ライブラリをインストールできるのがメリット
+      - name: Configure Poetry to not create virtualenvs
+        run: poetry config virtualenvs.create false
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Run tests
+        run: poetry run pytest
