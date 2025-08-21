@@ -23,7 +23,7 @@ class DockerConfig:
     
     @ports.setter
     def ports(self, value):
-        raise AttributeError("DockerConfigは不変です。設定を変更することはできません。")
+        raise AttributeError(self.error_message)
 
     @property
     def env_vars(self):
@@ -31,7 +31,7 @@ class DockerConfig:
     
     @env_vars.setter
     def env_vars(self, value):
-        raise AttributeError("DockerConfigは不変です。設定を変更することはできません。")
+        raise AttributeError(self.error_message)
 
     @property
     def volumes(self):
@@ -39,7 +39,7 @@ class DockerConfig:
     
     @volumes.setter
     def volumes(self, value):
-        raise AttributeError("DockerConfigは不変です。設定を変更することはできません。")
+        raise AttributeError(self.error_message)
 
     def __repr__(self):
         return (f"DockerConfig(image={self._image}, "
