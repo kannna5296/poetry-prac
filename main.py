@@ -1,5 +1,5 @@
 # 四則演算関数
-from docker_config import DockerConfig, DockerConfigBuilder
+from docker_config_immutable.docker_config import DockerConfig, DockerConfigBuilder
 
 def add(a, b):
     return a + b
